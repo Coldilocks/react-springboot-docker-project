@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  rest-project-database:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: student_info
+
+  rest-project-backend:
+    depends_on:
+      - rest-project-database
+    image: rest-project-backend:latest
+    ports:
+      - "8080:8080"
+
+  rest-project-frontend:
+    image: rest-project-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - rest-project-backend
